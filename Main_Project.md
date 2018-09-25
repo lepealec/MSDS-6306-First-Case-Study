@@ -91,7 +91,7 @@ ct_brew[sort(names(ct_brew))]
 ```r
 breweries %>% ggplot(aes(x=State)) + geom_bar()+xlab("State")+ylab("Count") + 
   scale_y_continuous(name="Count", labels = scales::comma) +
-  ggtitle("Brewery Count by State \nBy State")
+  ggtitle("Brewery Count by State \nBy State")+theme(axis.text.x = element_text(angle = 90, hjust = 1))
 ```
 
 ![](Main_Project_files/figure-html/breweries per state by state-1.png)<!-- -->
@@ -111,7 +111,147 @@ ct_brew[order(ct_brew)]
 ```
 
 ```r
-barplot(ct_brew[order(ct_brew)])
+breweries[order(breweries[["State"]]),]
+```
+
+```
+##      Brew_ID                              Name      City State
+##   1:     103       King Street Brewing Company Anchorage    AK
+##   2:     224      Midnight Sun Brewing Company Anchorage    AK
+##   3:     271           Alaskan Brewing Company    Juneau    AK
+##   4:     454            Denali Brewing Company Talkeetna    AK
+##   5:     459       Kenai River Brewing Company  Soldotna    AK
+##  ---                                                          
+## 554:     157 Greenbrier Valley Brewing Company Lewisburg    WV
+## 555:      80       Black Tooth Brewing Company  Sheridan    WY
+## 556:     192       Snake River Brewing Company   Jackson    WY
+## 557:     458   The Black Tooth Brewing Company  Sheridan    WY
+## 558:     551        Wind River Brewing Company  Pinedale    WY
+```
+
+```r
+names(ct_brew[order(ct_brew)])
+```
+
+```
+##  [1] "DC" "ND" "SD" "WV" "AR" "DE" "MS" "NV" "AL" "KS" "NH" "NJ" "TN" "HI"
+## [15] "KY" "NM" "SC" "UT" "WY" "IA" "ID" "LA" "NE" "RI" "OK" "AK" "GA" "MD"
+## [29] "CT" "ME" "MO" "MT" "VT" "AZ" "MN" "FL" "OH" "NY" "VA" "IL" "NC" "WI"
+## [43] "IN" "MA" "WA" "PA" "TX" "OR" "MI" "CA" "CO"
+```
+
+```r
+breweries %>% ggplot( aes(x=reorder(State,State,
+                     function(x)-length(x)))) + geom_bar()+xlab("State")+ylab("Count") + 
+  scale_y_continuous(name="Count", labels = scales::comma) +
+  ggtitle("Brewery Count by State \nBy Rank")+theme(axis.text.x = element_text(angle = 90, hjust = 1))
 ```
 
 ![](Main_Project_files/figure-html/breweries per state by rank-1.png)<!-- -->
+
+Here we can see Colorado (CO), California (CA), and Michigan (MI) have the most breweries with 47, 39, and 32 breweries respectively.
+
+Contrastly, Washington DC (DC), North Dakota (ND), South Dakota (SD), and West Virginia (WV) have the fewest breweries: 1 per state.
+
+
+```r
+nrow(breweries)
+```
+
+```
+## [1] 558
+```
+
+There are a total of 558 breweries listed in the data set.
+
+
+```r
+colnames(breweries)[colnames(breweries)=="Brew_ID"]="Brewery_id"
+colnames(breweries)[colnames(breweries)=="Name"]="Brewery_Name"
+colnames(beers)[colnames(beers)=="Name"]="Beer_Name"
+combined_data=merge(beers,breweries,by="Brewery_id")
+nrow(breweries)
+```
+
+```
+## [1] 558
+```
+
+```r
+nrow(combined_data)==nrow(beers)
+```
+
+```
+## [1] TRUE
+```
+First six observations
+
+```r
+head(combined_data)
+```
+
+```
+##    Brewery_id     Beer_Name Beer_ID   ABV IBU
+## 1:          1  Get Together    2692 0.045  50
+## 2:          1 Maggie's Leap    2691 0.049  26
+## 3:          1    Wall's End    2690 0.048  19
+## 4:          1       Pumpion    2689 0.060  38
+## 5:          1    Stronghold    2688 0.060  25
+## 6:          1   Parapet ESB    2687 0.056  47
+##                                  Style Ounces      Brewery_Name
+## 1:                        American IPA     16 NorthGate Brewing
+## 2:                  Milk / Sweet Stout     16 NorthGate Brewing
+## 3:                   English Brown Ale     16 NorthGate Brewing
+## 4:                         Pumpkin Ale     16 NorthGate Brewing
+## 5:                     American Porter     16 NorthGate Brewing
+## 6: Extra Special / Strong Bitter (ESB)     16 NorthGate Brewing
+##           City State
+## 1: Minneapolis    MN
+## 2: Minneapolis    MN
+## 3: Minneapolis    MN
+## 4: Minneapolis    MN
+## 5: Minneapolis    MN
+## 6: Minneapolis    MN
+```
+Last six observations
+
+```r
+tail(combined_data)
+```
+
+```
+##    Brewery_id                 Beer_Name Beer_ID   ABV IBU
+## 1:        556             Pilsner Ukiah      98 0.055  NA
+## 2:        557  Heinnieweisse Weissebier      52 0.049  NA
+## 3:        557           Snapperhead IPA      51 0.068  NA
+## 4:        557         Moo Thunder Stout      50 0.049  NA
+## 5:        557         Porkslap Pale Ale      49 0.043  NA
+## 6:        558 Urban Wilderness Pale Ale      30 0.049  NA
+##                      Style Ounces                  Brewery_Name
+## 1:         German Pilsener     12         Ukiah Brewing Company
+## 2:              Hefeweizen     12       Butternuts Beer and Ale
+## 3:            American IPA     12       Butternuts Beer and Ale
+## 4:      Milk / Sweet Stout     12       Butternuts Beer and Ale
+## 5: American Pale Ale (APA)     12       Butternuts Beer and Ale
+## 6:        English Pale Ale     12 Sleeping Lady Brewing Company
+##             City State
+## 1:         Ukiah    CA
+## 2: Garrattsville    NY
+## 3: Garrattsville    NY
+## 4: Garrattsville    NY
+## 5: Garrattsville    NY
+## 6:     Anchorage    AK
+```
+Sum of NA's per column
+
+```r
+apply(combined_data,2,function(x) sum(is.na(x)))
+```
+
+```
+##   Brewery_id    Beer_Name      Beer_ID          ABV          IBU 
+##            0            0            0           62         1005 
+##        Style       Ounces Brewery_Name         City        State 
+##            0            0            0            0            0
+```
+

@@ -11,7 +11,7 @@ output:
 library("data.table")
 library("tidyverse")
 knitr::opts_chunk$set(fig.width = 10, fig.length=10, fig.asp = 1/3,  message=FALSE)
-fig.path = "~/Figures2"
+fig.path = "~/Figures"
 ```
 
 ### URL
@@ -55,7 +55,7 @@ Here we can see Colorado (CO), California (CA), and Michigan (MI) have the most 
 
 Contrastly, Washington DC (DC), North Dakota (ND), South Dakota (SD), and West Virginia (WV) have the fewest breweries: 1 per state.
 
-```{r breweries per state by rank}
+```{r total breweries}
 nrow(breweries)
 ```
 
@@ -78,8 +78,7 @@ Last six observations
 tail(combined_data)
 ```
 Sum of NA's per column
-``` {r sum of NA's by column}
-apply(combined_data,2,function(x) sum(is.na(x)))```
+``` {r sum of NA}
+apply(combined_data,2,function(x) sum(is.na(x)))
 ```
 
-sum(ct_brew[order(ct_brew)])
