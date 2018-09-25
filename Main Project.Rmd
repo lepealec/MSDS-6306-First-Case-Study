@@ -1,0 +1,85 @@
+---
+title: "2"
+author: "Alec Lepe"
+date: "09/07/2018"
+output: 
+  html_document:
+    keep_md: true
+---
+```{r setup, include = FALSE}
+#install.packages("R")
+library("data.table")
+library("tidyverse")
+knitr::opts_chunk$set(fig.width = 10, fig.length=10, fig.asp = 1/3,  message=FALSE)
+fig.path = "~/Figures2"
+```
+
+### URL
+https://github.com/lepealec/MSDS-6306-First-Case-Study.git
+
+### Data description.
+
+### Load and preview data
+``` {r load data}
+setwd("~/MSDS-6306-First-Case-Study/Guidlines")
+
+beers=fread("beers.csv")
+beers
+breweries=fread("breweries.csv")
+breweries
+```
+
+
+### How many breweries are the per state?
+By state,
+```{r breweries per state by state}
+ct_brew=table(breweries[["State"]])
+ct_brew[sort(names(ct_brew))]
+breweries %>% ggplot(aes(x=State)) + geom_bar()+xlab("State")+ylab("Count") + 
+  scale_y_continuous(name="Count", labels = scales::comma) +
+  ggtitle("Brewery Count by State \nBy State")+theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+```{r breweries per state by rank}
+ct_brew[order(ct_brew)]
+breweries[order(breweries[["State"]]),]
+names(ct_brew[order(ct_brew)])
+
+breweries %>% ggplot( aes(x=reorder(State,State,
+                     function(x)-length(x)))) + geom_bar()+xlab("State")+ylab("Count") + 
+  scale_y_continuous(name="Count", labels = scales::comma) +
+  ggtitle("Brewery Count by State \nBy Rank")+theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+```
+
+Here we can see Colorado (CO), California (CA), and Michigan (MI) have the most breweries with 47, 39, and 32 breweries respectively.
+
+Contrastly, Washington DC (DC), North Dakota (ND), South Dakota (SD), and West Virginia (WV) have the fewest breweries: 1 per state.
+
+```{r breweries per state by rank}
+nrow(breweries)
+```
+
+There are a total of 558 breweries listed in the data set.
+
+``` {r merge data sets}
+colnames(breweries)[colnames(breweries)=="Brew_ID"]="Brewery_id"
+colnames(breweries)[colnames(breweries)=="Name"]="Brewery_Name"
+colnames(beers)[colnames(beers)=="Name"]="Beer_Name"
+combined_data=merge(beers,breweries,by="Brewery_id")
+nrow(breweries)
+nrow(combined_data)==nrow(beers)
+```
+First six observations
+``` {r head}
+head(combined_data)
+```
+Last six observations
+``` {r tail}
+tail(combined_data)
+```
+Sum of NA's per column
+``` {r sum of NA's by column}
+apply(combined_data,2,function(x) sum(is.na(x)))```
+```
+
+sum(ct_brew[order(ct_brew)])
