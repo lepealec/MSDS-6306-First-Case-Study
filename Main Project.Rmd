@@ -12,7 +12,7 @@ library("data.table")
 library("tidyverse")
 library('ggplot2')
 knitr::opts_chunk$set(fig.width = 10, fig.length=10, fig.asp = 1/3,  message=FALSE)
-fig.path = "~/Figures"
+fig.path = "~/Main_Project_files/figure-html"
 ```
 
 ### URL
@@ -36,6 +36,8 @@ By state,
 ```{r breweries per state by state}
 ct_brew=table(breweries[["State"]])
 ct_brew[sort(names(ct_brew))]
+```
+``` {r plot 1}
 breweries %>% ggplot(aes(x=State)) + geom_bar()+xlab("State")+ylab("Count") + 
   scale_y_continuous(name="Count", labels = scales::comma) +
   ggtitle("Brewery Count by State \nBy State")+theme(axis.text.x = element_text(angle = 90, hjust = 1))

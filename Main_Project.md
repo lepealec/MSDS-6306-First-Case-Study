@@ -94,7 +94,7 @@ breweries %>% ggplot(aes(x=State)) + geom_bar()+xlab("State")+ylab("Count") +
   ggtitle("Brewery Count by State \nBy State")+theme(axis.text.x = element_text(angle = 90, hjust = 1))
 ```
 
-![](Main_Project_files/figure-html/breweries per state by state-1.png)<!-- -->
+![](Main_Project_files/figure-html/plot 1-1.png)<!-- -->
 
 ```r
 ct_brew[order(ct_brew)]
