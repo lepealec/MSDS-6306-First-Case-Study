@@ -47,7 +47,7 @@ ct_brew[sort(names(ct_brew))]
 ``` {r plot1}
 breweries %>% ggplot(aes(x=State)) + geom_bar()+xlab("State")+ylab("Count") + 
   scale_y_continuous(name="Count", labels = scales::comma) +
-  ggtitle("Brewery Count by State \nBy State")+theme(axis.text.x = element_text(angle = 90, hjust = 1))
+  ggtitle("Brewery Count by State")+theme(axis.text.x = element_text(angle = 90, hjust = 1))
 ```
 ```{r breweries_per_state_by_rank}
 ct_brew[order(ct_brew)]
@@ -98,6 +98,8 @@ ibu=combined_data[,median(na.omit(as.numeric(IBU))),State]
 colnames(abv)[2]="ABV"
 colnames(ibu)[2]="IBU"
 meds=merge(ibu,abv,by="State")
+meds
+str(meds)
 ```
 
 Median IBU per State Plot

@@ -172,7 +172,7 @@ ct_brew[sort(names(ct_brew))]
 ```r
 breweries %>% ggplot(aes(x=State)) + geom_bar()+xlab("State")+ylab("Count") + 
   scale_y_continuous(name="Count", labels = scales::comma) +
-  ggtitle("Brewery Count by State \nBy State")+theme(axis.text.x = element_text(angle = 90, hjust = 1))
+  ggtitle("Brewery Count by State")+theme(axis.text.x = element_text(angle = 90, hjust = 1))
 ```
 
 ![](Main_Project_files/figure-html/plot1-1.png)<!-- -->
@@ -343,6 +343,76 @@ ibu=combined_data[,median(na.omit(as.numeric(IBU))),State]
 colnames(abv)[2]="ABV"
 colnames(ibu)[2]="IBU"
 meds=merge(ibu,abv,by="State")
+meds
+```
+
+```
+##     State  IBU    ABV
+##  1:    AK 46.0 0.0560
+##  2:    AL 43.0 0.0600
+##  3:    AR 39.0 0.0520
+##  4:    AZ 20.5 0.0550
+##  5:    CA 42.0 0.0580
+##  6:    CO 40.0 0.0605
+##  7:    CT 29.0 0.0600
+##  8:    DC 47.5 0.0625
+##  9:    DE 52.0 0.0550
+## 10:    FL 55.0 0.0570
+## 11:    GA 55.0 0.0550
+## 12:    HI 22.5 0.0540
+## 13:    IA 26.0 0.0555
+## 14:    ID 39.0 0.0565
+## 15:    IL 30.0 0.0580
+## 16:    IN 33.0 0.0580
+## 17:    KS 20.0 0.0500
+## 18:    KY 31.5 0.0625
+## 19:    LA 31.5 0.0520
+## 20:    MA 35.0 0.0540
+## 21:    MD 29.0 0.0580
+## 22:    ME 61.0 0.0510
+## 23:    MI 35.0 0.0620
+## 24:    MN 44.5 0.0560
+## 25:    MO 24.0 0.0520
+## 26:    MS 45.0 0.0580
+## 27:    MT 40.0 0.0550
+## 28:    NC 33.5 0.0570
+## 29:    ND 32.0 0.0500
+## 30:    NE 35.0 0.0560
+## 31:    NH 48.5 0.0550
+## 32:    NJ 34.5 0.0460
+## 33:    NM 51.0 0.0620
+## 34:    NV 41.0 0.0600
+## 35:    NY 47.0 0.0550
+## 36:    OH 40.0 0.0580
+## 37:    OK 35.0 0.0600
+## 38:    OR 40.0 0.0560
+## 39:    PA 30.0 0.0570
+## 40:    RI 24.0 0.0550
+## 41:    SC 30.0 0.0550
+## 42:    SD   NA 0.0600
+## 43:    TN 37.0 0.0570
+## 44:    TX 33.0 0.0550
+## 45:    UT 34.0 0.0400
+## 46:    VA 42.0 0.0565
+## 47:    VT 30.0 0.0550
+## 48:    WA 38.0 0.0555
+## 49:    WI 19.0 0.0520
+## 50:    WV 57.5 0.0620
+## 51:    WY 21.0 0.0500
+##     State  IBU    ABV
+```
+
+```r
+str(meds)
+```
+
+```
+## Classes 'data.table' and 'data.frame':	51 obs. of  3 variables:
+##  $ State: chr  "AK" "AL" "AR" "AZ" ...
+##  $ IBU  : num  46 43 39 20.5 42 40 29 47.5 52 55 ...
+##  $ ABV  : num  0.056 0.06 0.052 0.055 0.058 0.0605 0.06 0.0625 0.055 0.057 ...
+##  - attr(*, ".internal.selfref")=<externalptr> 
+##  - attr(*, "sorted")= chr "State"
 ```
 
 Median IBU per State Plot
