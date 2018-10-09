@@ -17,7 +17,6 @@ https://github.com/lepealec/MSDS-6306-First-Case-Study.git
 
 ```r
 setwd("~/MSDS-6306-First-Case-Study/Guidlines")
-
 beers=fread("beers.csv")
 beers
 ```
@@ -324,6 +323,7 @@ sum_abv
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
 ## 0.00100 0.05000 0.05600 0.05977 0.06700 0.12800      62
 ```
+1
 
 ```r
 ggplot(combined_data,aes(x = ABV,y = IBU ))+geom_point(na.rm=TRUE)+geom_smooth(method=lm,se=FALSE, na.rm=TRUE)+
@@ -339,4 +339,5 @@ cor(na.omit(combined_data)[["ABV"]],na.omit(combined_data)[["IBU"]])
 ```
 ## [1] 0.6706215
 ```
+2
 

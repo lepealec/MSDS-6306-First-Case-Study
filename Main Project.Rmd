@@ -23,7 +23,6 @@ https://github.com/lepealec/MSDS-6306-First-Case-Study.git
 ### Load and preview data
 ``` {r load data}
 setwd("~/MSDS-6306-First-Case-Study/Guidlines")
-
 beers=fread("beers.csv")
 beers
 breweries=fread("breweries.csv")
@@ -119,9 +118,11 @@ combined_data[which.max(IBU),]
 sum_abv=summary(combined_data[["ABV"]])
 sum_abv
 ```
+1
 ``` {r correl graph}
 ggplot(combined_data,aes(x = ABV,y = IBU ))+geom_point(na.rm=TRUE)+geom_smooth(method=lm,se=FALSE, na.rm=TRUE)+
   ggtitle("IBU vs ABV content per Alcohol")
 cor(na.omit(combined_data)[["ABV"]],na.omit(combined_data)[["IBU"]])
 ```
+2
 
