@@ -87,7 +87,6 @@ ct_brew[sort(names(ct_brew))]
 ##  4
 ```
 
-1
 
 
 ```r
@@ -97,9 +96,6 @@ breweries %>% ggplot(aes(x=State)) + geom_bar()+xlab("State")+ylab("Count") +
 ```
 
 ![](Main_Project_files/figure-html/plot1-1.png)<!-- -->
-
-2
-
 
 ```r
 ct_brew[order(ct_brew)]
@@ -152,7 +148,7 @@ breweries %>% ggplot( aes(x=reorder(State,State,
   ggtitle("Brewery Count by State \nBy Rank")+theme(axis.text.x = element_text(angle = 90, hjust = 1))
 ```
 
-![](Main_Project_files/figure-html/breweries per state by rank-1.png)<!-- -->
+![](Main_Project_files/figure-html/breweries_per_state_by_rank-1.png)<!-- -->
 
 Here we can see Colorado (CO), California (CA), and Michigan (MI) have the most breweries with 47, 39, and 32 breweries respectively.
 
@@ -280,7 +276,7 @@ ggplot(meds,aes(reorder(meds$State,-meds$IBU), y = meds$IBU))+geom_bar(stat = "i
 ## Warning: Removed 1 rows containing missing values (position_stack).
 ```
 
-![](Main_Project_files/figure-html/IBU Plot-1.png)<!-- -->
+![](Main_Project_files/figure-html/IBU_Plot-1.png)<!-- -->
 Median ABV per State Plot
 
 ```r
@@ -288,7 +284,7 @@ ggplot(meds,aes(reorder(meds$State,-meds$ABV), y = meds$ABV))+geom_bar(stat = "i
   ggtitle("Median ABV per State")+theme(axis.text.x = element_text(angle = 90, hjust = 1))
 ```
 
-![](Main_Project_files/figure-html/ABV plot-1.png)<!-- -->
+![](Main_Project_files/figure-html/ABV_plot-1.png)<!-- -->
 
 
 MAX ABV
@@ -329,7 +325,7 @@ sum_abv
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
 ## 0.00100 0.05000 0.05600 0.05977 0.06700 0.12800      62
 ```
-1
+
 
 ```r
 ggplot(combined_data,aes(x = ABV,y = IBU ))+geom_point(na.rm=TRUE)+geom_smooth(method=lm,se=FALSE, na.rm=TRUE)+
@@ -345,5 +341,5 @@ cor(na.omit(combined_data)[["ABV"]],na.omit(combined_data)[["IBU"]])
 ```
 ## [1] 0.6706215
 ```
-2
+
 
