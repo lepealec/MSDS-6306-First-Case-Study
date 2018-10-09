@@ -86,7 +86,9 @@ ct_brew[sort(names(ct_brew))]
 ## WY 
 ##  4
 ```
+
 1
+
 
 ```r
 breweries %>% ggplot(aes(x=State)) + geom_bar()+xlab("State")+ylab("Count") + 
@@ -94,8 +96,10 @@ breweries %>% ggplot(aes(x=State)) + geom_bar()+xlab("State")+ylab("Count") +
   ggtitle("Brewery Count by State \nBy State")+theme(axis.text.x = element_text(angle = 90, hjust = 1))
 ```
 
-![](Main_Project_files/figure-html/plot 1-1.png)<!-- -->
+![](Main_Project_files/figure-html/plot1-1.png)<!-- -->
+
 2
+
 
 ```r
 ct_brew[order(ct_brew)]
@@ -332,7 +336,7 @@ ggplot(combined_data,aes(x = ABV,y = IBU ))+geom_point(na.rm=TRUE)+geom_smooth(m
   ggtitle("IBU vs ABV content per Alcohol")
 ```
 
-![](Main_Project_files/figure-html/correl graph-1.png)<!-- -->
+![](Main_Project_files/figure-html/correl_graph-1.png)<!-- -->
 
 ```r
 cor(na.omit(combined_data)[["ABV"]],na.omit(combined_data)[["IBU"]])
