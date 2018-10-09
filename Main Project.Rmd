@@ -36,11 +36,13 @@ By state,
 ct_brew=table(breweries[["State"]])
 ct_brew[sort(names(ct_brew))]
 ```
+1
 ``` {r plot 1}
 breweries %>% ggplot(aes(x=State)) + geom_bar()+xlab("State")+ylab("Count") + 
   scale_y_continuous(name="Count", labels = scales::comma) +
   ggtitle("Brewery Count by State \nBy State")+theme(axis.text.x = element_text(angle = 90, hjust = 1))
 ```
+2
 ```{r breweries per state by rank}
 ct_brew[order(ct_brew)]
 breweries[order(breweries[["State"]]),]
