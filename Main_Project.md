@@ -255,3 +255,88 @@ apply(combined_data,2,function(x) sum(is.na(x)))
 ##            0            0            0            0            0
 ```
 
+
+```r
+abv=combined_data[,median(na.omit(as.numeric(ABV))),State]
+ibu=combined_data[,median(na.omit(as.numeric(IBU))),State]
+colnames(abv)[2]="ABV"
+colnames(ibu)[2]="IBU"
+meds=merge(ibu,abv,by="State")
+```
+
+Median IBU per State Plot
+
+```r
+ggplot(meds,aes(reorder(meds$State,-meds$IBU), y = meds$IBU))+geom_bar(stat = "identity")+labs(x = "State" , y = "IBU") + 
+  ggtitle("Median IBU per State")+theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+
+```
+## Warning: Removed 1 rows containing missing values (position_stack).
+```
+
+![](Main_Project_files/figure-html/IBU Plot-1.png)<!-- -->
+Median ABV per State Plot
+
+```r
+ggplot(meds,aes(reorder(meds$State,-meds$ABV), y = meds$ABV))+geom_bar(stat = "identity")+labs(x = "State" , y = "IBU") + 
+  ggtitle("Median ABV per State")+theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+
+![](Main_Project_files/figure-html/ABV plot-1.png)<!-- -->
+
+
+MAX ABV
+
+```r
+combined_data[which.max(ABV),]
+```
+
+```
+##    Brewery_id                                            Beer_Name Beer_ID
+## 1:         52 Lee Hill Series Vol. 5 - Belgian Style Quadrupel Ale    2565
+##      ABV IBU            Style Ounces            Brewery_Name    City State
+## 1: 0.128  NA Quadrupel (Quad)   19.2 Upslope Brewing Company Boulder    CO
+```
+
+Max IBU
+
+```r
+combined_data[which.max(IBU),]
+```
+
+```
+##    Brewery_id                 Beer_Name Beer_ID   ABV IBU
+## 1:        375 Bitter Bitch Imperial IPA     980 0.082 138
+##                             Style Ounces            Brewery_Name    City
+## 1: American Double / Imperial IPA     12 Astoria Brewing Company Astoria
+##    State
+## 1:    OR
+```
+
+
+```r
+sum_abv=summary(combined_data[["ABV"]])
+sum_abv
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+## 0.00100 0.05000 0.05600 0.05977 0.06700 0.12800      62
+```
+
+```r
+ggplot(combined_data,aes(x = ABV,y = IBU ))+geom_point(na.rm=TRUE)+geom_smooth(method=lm,se=FALSE, na.rm=TRUE)+
+  ggtitle("IBU vs ABV content per Alcohol")
+```
+
+![](Main_Project_files/figure-html/correl graph-1.png)<!-- -->
+
+```r
+cor(na.omit(combined_data)[["ABV"]],na.omit(combined_data)[["IBU"]])
+```
+
+```
+## [1] 0.6706215
+```
+
