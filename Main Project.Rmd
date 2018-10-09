@@ -8,9 +8,6 @@ output:
 ---
 ```{r setup, include = FALSE}
 #install.packages("R")
-library("data.table")
-library("tidyverse")
-library('ggplot2')
 knitr::opts_chunk$set(fig.width = 10, fig.length=10, fig.asp = 1/3,  message=FALSE)
 fig.path = "~/Figures"
 ```
@@ -19,6 +16,13 @@ fig.path = "~/Figures"
 https://github.com/lepealec/MSDS-6306-First-Case-Study.git
 
 ### Data description.
+
+``` {r reproducibility}
+library("data.table")
+library("tidyverse")
+library('ggplot2')
+sessionInfo()
+```
 
 ### Load and preview data
 ``` {r load data}
