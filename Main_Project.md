@@ -13,6 +13,57 @@ https://github.com/lepealec/MSDS-6306-First-Case-Study.git
 
 ### Data description.
 
+
+```r
+library("data.table")
+library("tidyverse")
+```
+
+```
+## Warning: package 'dplyr' was built under R version 3.5.1
+```
+
+```r
+library('ggplot2')
+sessionInfo()
+```
+
+```
+## R version 3.5.0 (2018-04-23)
+## Platform: x86_64-apple-darwin15.6.0 (64-bit)
+## Running under: macOS High Sierra 10.13.6
+## 
+## Matrix products: default
+## BLAS: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRblas.0.dylib
+## LAPACK: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRlapack.dylib
+## 
+## locale:
+## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+## 
+## attached base packages:
+## [1] stats     graphics  grDevices utils     datasets  methods   base     
+## 
+## other attached packages:
+##  [1] forcats_0.3.0     stringr_1.3.0     dplyr_0.7.6      
+##  [4] purrr_0.2.5       readr_1.1.1       tidyr_0.8.1      
+##  [7] tibble_1.4.2      ggplot2_2.2.1     tidyverse_1.2.1  
+## [10] data.table_1.11.4
+## 
+## loaded via a namespace (and not attached):
+##  [1] Rcpp_0.12.16     cellranger_1.1.0 pillar_1.2.2     compiler_3.5.0  
+##  [5] plyr_1.8.4       bindr_0.1.1      tools_3.5.0      digest_0.6.15   
+##  [9] lubridate_1.7.4  jsonlite_1.5     evaluate_0.11    nlme_3.1-137    
+## [13] gtable_0.2.0     lattice_0.20-35  pkgconfig_2.0.2  rlang_0.2.0     
+## [17] cli_1.0.0        rstudioapi_0.7   yaml_2.2.0       haven_1.1.2     
+## [21] bindrcpp_0.2.2   xml2_1.2.0       httr_1.3.1       knitr_1.20      
+## [25] hms_0.4.2        rprojroot_1.3-2  grid_3.5.0       tidyselect_0.2.4
+## [29] glue_1.2.0       R6_2.2.2         readxl_1.1.0     rmarkdown_1.10  
+## [33] modelr_0.1.2     magrittr_1.5     backports_1.1.2  scales_0.5.0    
+## [37] htmltools_0.3.6  rvest_0.3.2      assertthat_0.2.0 colorspace_1.3-2
+## [41] stringi_1.2.2    lazyeval_0.2.1   munsell_0.4.3    broom_0.5.0     
+## [45] crayon_1.3.4
+```
+
 ### Load and preview data
 
 ```r
@@ -49,6 +100,22 @@ beers
 ```
 
 ```r
+str(beers)
+```
+
+```
+## Classes 'data.table' and 'data.frame':	2410 obs. of  7 variables:
+##  $ Name      : chr  "Pub Beer" "Devil's Cup" "Rise of the Phoenix" "Sinister" ...
+##  $ Beer_ID   : int  1436 2265 2264 2263 2262 2261 2260 2259 2258 2131 ...
+##  $ ABV       : num  0.05 0.066 0.071 0.09 0.075 0.077 0.045 0.065 0.055 0.086 ...
+##  $ IBU       : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ Brewery_id: int  409 178 178 178 178 178 178 178 178 178 ...
+##  $ Style     : chr  "American Pale Lager" "American Pale Ale (APA)" "American IPA" "American Double / Imperial IPA" ...
+##  $ Ounces    : num  12 12 12 12 12 12 12 12 12 12 ...
+##  - attr(*, ".internal.selfref")=<externalptr>
+```
+
+```r
 breweries=fread("breweries.csv")
 breweries
 ```
@@ -66,6 +133,19 @@ breweries
 ## 556:     556         Ukiah Brewing Company         Ukiah    CA
 ## 557:     557       Butternuts Beer and Ale Garrattsville    NY
 ## 558:     558 Sleeping Lady Brewing Company     Anchorage    AK
+```
+
+```r
+str(breweries)
+```
+
+```
+## Classes 'data.table' and 'data.frame':	558 obs. of  4 variables:
+##  $ Brew_ID: int  1 2 3 4 5 6 7 8 9 10 ...
+##  $ Name   : chr  "NorthGate Brewing" "Against the Grain Brewery" "Jack's Abby Craft Lagers" "Mike Hess Brewing Company" ...
+##  $ City   : chr  "Minneapolis" "Louisville" "Framingham" "San Diego" ...
+##  $ State  : chr  "MN" "KY" "MA" "CA" ...
+##  - attr(*, ".internal.selfref")=<externalptr>
 ```
 
 

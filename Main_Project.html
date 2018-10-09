@@ -135,6 +135,44 @@ $(document).ready(function () {
 </div>
 <div id="data-description." class="section level3">
 <h3>Data description.</h3>
+<pre class="r"><code>library(&quot;data.table&quot;)
+library(&quot;tidyverse&quot;)</code></pre>
+<pre><code>## Warning: package 'dplyr' was built under R version 3.5.1</code></pre>
+<pre class="r"><code>library('ggplot2')
+sessionInfo()</code></pre>
+<pre><code>## R version 3.5.0 (2018-04-23)
+## Platform: x86_64-apple-darwin15.6.0 (64-bit)
+## Running under: macOS High Sierra 10.13.6
+## 
+## Matrix products: default
+## BLAS: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRblas.0.dylib
+## LAPACK: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRlapack.dylib
+## 
+## locale:
+## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+## 
+## attached base packages:
+## [1] stats     graphics  grDevices utils     datasets  methods   base     
+## 
+## other attached packages:
+##  [1] forcats_0.3.0     stringr_1.3.0     dplyr_0.7.6      
+##  [4] purrr_0.2.5       readr_1.1.1       tidyr_0.8.1      
+##  [7] tibble_1.4.2      ggplot2_2.2.1     tidyverse_1.2.1  
+## [10] data.table_1.11.4
+## 
+## loaded via a namespace (and not attached):
+##  [1] Rcpp_0.12.16     cellranger_1.1.0 pillar_1.2.2     compiler_3.5.0  
+##  [5] plyr_1.8.4       bindr_0.1.1      tools_3.5.0      digest_0.6.15   
+##  [9] lubridate_1.7.4  jsonlite_1.5     evaluate_0.11    nlme_3.1-137    
+## [13] gtable_0.2.0     lattice_0.20-35  pkgconfig_2.0.2  rlang_0.2.0     
+## [17] cli_1.0.0        rstudioapi_0.7   yaml_2.2.0       haven_1.1.2     
+## [21] bindrcpp_0.2.2   xml2_1.2.0       httr_1.3.1       knitr_1.20      
+## [25] hms_0.4.2        rprojroot_1.3-2  grid_3.5.0       tidyselect_0.2.4
+## [29] glue_1.2.0       R6_2.2.2         readxl_1.1.0     rmarkdown_1.10  
+## [33] modelr_0.1.2     magrittr_1.5     backports_1.1.2  scales_0.5.0    
+## [37] htmltools_0.3.6  rvest_0.3.2      assertthat_0.2.0 colorspace_1.3-2
+## [41] stringi_1.2.2    lazyeval_0.2.1   munsell_0.4.3    broom_0.5.0     
+## [45] crayon_1.3.4</code></pre>
 </div>
 <div id="load-and-preview-data" class="section level3">
 <h3>Load and preview data</h3>
@@ -165,6 +203,16 @@ beers</code></pre>
 ## 2408:                    Schwarzbier     12
 ## 2409:        American Pale Ale (APA)     12
 ## 2410:       American Amber / Red Ale     12</code></pre>
+<pre class="r"><code>str(beers)</code></pre>
+<pre><code>## Classes 'data.table' and 'data.frame':   2410 obs. of  7 variables:
+##  $ Name      : chr  &quot;Pub Beer&quot; &quot;Devil's Cup&quot; &quot;Rise of the Phoenix&quot; &quot;Sinister&quot; ...
+##  $ Beer_ID   : int  1436 2265 2264 2263 2262 2261 2260 2259 2258 2131 ...
+##  $ ABV       : num  0.05 0.066 0.071 0.09 0.075 0.077 0.045 0.065 0.055 0.086 ...
+##  $ IBU       : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ Brewery_id: int  409 178 178 178 178 178 178 178 178 178 ...
+##  $ Style     : chr  &quot;American Pale Lager&quot; &quot;American Pale Ale (APA)&quot; &quot;American IPA&quot; &quot;American Double / Imperial IPA&quot; ...
+##  $ Ounces    : num  12 12 12 12 12 12 12 12 12 12 ...
+##  - attr(*, &quot;.internal.selfref&quot;)=&lt;externalptr&gt;</code></pre>
 <pre class="r"><code>breweries=fread(&quot;breweries.csv&quot;)
 breweries</code></pre>
 <pre><code>##      Brew_ID                          Name          City State
@@ -179,6 +227,13 @@ breweries</code></pre>
 ## 556:     556         Ukiah Brewing Company         Ukiah    CA
 ## 557:     557       Butternuts Beer and Ale Garrattsville    NY
 ## 558:     558 Sleeping Lady Brewing Company     Anchorage    AK</code></pre>
+<pre class="r"><code>str(breweries)</code></pre>
+<pre><code>## Classes 'data.table' and 'data.frame':   558 obs. of  4 variables:
+##  $ Brew_ID: int  1 2 3 4 5 6 7 8 9 10 ...
+##  $ Name   : chr  &quot;NorthGate Brewing&quot; &quot;Against the Grain Brewery&quot; &quot;Jack's Abby Craft Lagers&quot; &quot;Mike Hess Brewing Company&quot; ...
+##  $ City   : chr  &quot;Minneapolis&quot; &quot;Louisville&quot; &quot;Framingham&quot; &quot;San Diego&quot; ...
+##  $ State  : chr  &quot;MN&quot; &quot;KY&quot; &quot;MA&quot; &quot;CA&quot; ...
+##  - attr(*, &quot;.internal.selfref&quot;)=&lt;externalptr&gt;</code></pre>
 </div>
 <div id="how-many-breweries-are-the-per-state" class="section level3">
 <h3>How many breweries are the per state?</h3>

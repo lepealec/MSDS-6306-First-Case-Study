@@ -29,8 +29,10 @@ sessionInfo()
 setwd("~/MSDS-6306-First-Case-Study/Guidlines")
 beers=fread("beers.csv")
 beers
+str(beers)
 breweries=fread("breweries.csv")
 breweries
+str(breweries)
 ```
 
 
