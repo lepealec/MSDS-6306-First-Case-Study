@@ -1,7 +1,7 @@
 ---
-title: "2"
-author: "Alec Lepe"
-date: "09/07/2018"
+title: "MSDS 6363 First Coure Project"
+author: "Alec Lepe, Che Cobb, and Andrew Wilkins"
+date: "10/08/2018"
 output: 
   html_document:
     keep_md: true
