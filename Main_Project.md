@@ -476,6 +476,12 @@ sum_abv
 ## 0.00100 0.05000 0.05600 0.05977 0.06700 0.12800      62
 ```
 
+```r
+boxplot(combined_data[["ABV"]],main='ABV Barplot',ylab="ABV")
+```
+
+![](Main_Project_files/figure-html/summary ABV-1.png)<!-- -->
+
 
 ```r
 ggplot(combined_data,aes(x = ABV,y = IBU ))+geom_point(na.rm=TRUE)+geom_smooth(method=lm,se=FALSE, na.rm=TRUE)+

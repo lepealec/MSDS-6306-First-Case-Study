@@ -127,6 +127,7 @@ combined_data[which.max(IBU),]
 ``` {r summary ABV}
 sum_abv=summary(combined_data[["ABV"]])
 sum_abv
+boxplot(combined_data[["ABV"]],main='ABV Barplot',ylab="ABV")
 ```
 
 ``` {r correl_graph}

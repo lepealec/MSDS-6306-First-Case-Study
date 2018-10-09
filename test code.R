@@ -70,7 +70,7 @@ ggplot(meds,aes(reorder(meds$State,-meds$ABV), y = meds$ABV))+geom_bar(stat = "i
   ggtitle("Median ABV per State")+theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
 ggplot(meds,aes(reorder(meds$State,-meds$ABV), y = meds$ABV))+geom_bar(stat = "identity")+labs(x = "State" , y = "IBU") + 
-  ggtitle("Median ABV per State")+theme(axis.text.x = element_text(angle = 90, hjust = 1))
+  ggtitle("Median ABV per State")+theme(axis.text.x = element_text(angle = 90, hjust = 1))+scale_y_continuous(limits=c(0.0,0.0625))
 
 
 
