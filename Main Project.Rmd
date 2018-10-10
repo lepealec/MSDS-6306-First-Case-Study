@@ -187,4 +187,4 @@ r= cor(na.omit(combined_data)[["ABV"]],na.omit(combined_data)[["IBU"]])
 r
 ```
 
-The data suggests there is a moderate linear relationship between ABV and IBU.  With an correlation coefficient of `r round(r,2)`, ABV describes roughly `r round((r^2)*100)`% of the variability in IBU.  So while there does appear to be a positive linear relationship, we can't say with confidence that that a higher ABV causes a great IBU. 
+The data suggests there is a moderate linear relationship between ABV and IBU.  With an correlation coefficient of `r round(r,2)`, ABV describes roughly `r round((r^2)*100)`% of the variability in IBU.  So while there does appear to be a positive linear relationship, we can't say with confidence that that a higher ABV causes a great IBU.
