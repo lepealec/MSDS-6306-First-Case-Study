@@ -36,7 +36,7 @@ str(breweries)
 ```
 
 
-### How many breweries are the per state?
+### How many breweries are their per state?
 By state,
 ```{r breweries per state by state}
 ct_brew=table(breweries[["State"]])
