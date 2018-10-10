@@ -1,5 +1,5 @@
 ---
-title: "MSDS 6363 First Coure Project"
+title: "MSDS 6363 Case Study 1"
 author: "Alec Lepe, Che Cobb, and Andrew Wilkins"
 date: "10/08/2018"
 output: 
@@ -7,6 +7,22 @@ output:
     keep_md: true
 ---
 
+
+### Introduction
+
+The R Team was presented with two data sets for analysis.  The first set, "Beers.csv" contains a list of 2410 US craft beers and various properties specific to each individual beer.  The second set, "Breweries.csv" contains the city and state data for 558 US breweries, and their unique Brewery ID number.  In alalyzing the data, the following questions and methods will be explored:
+
+* How many breweries are present in each state?
+* Merge beer data with the breweries data. Print the first 6
+observations and the last six observations to check the merged file.
+* Report the number of NA's in each column.
+* Compute the median alcohol content and international
+bitterness unit for each state. Plot a bar chart to compare.
+* Which state has the maximum alcoholic (ABV) beer? Which
+state has the most bitter (IBU) beer?
+* Summary statistics for the ABV variable.
+* Is there an apparent relationship between the bitterness of the
+beer and its alcoholic content? Draw a scatter plot.
 
 ### URL
 https://github.com/lepealec/MSDS-6306-First-Case-Study.git
@@ -17,140 +33,67 @@ https://github.com/lepealec/MSDS-6306-First-Case-Study.git
 ```r
 library("data.table")
 library("tidyverse")
-```
-
-```
-## Warning: package 'dplyr' was built under R version 3.5.1
-```
-
-```r
 library('ggplot2')
+library("reshape2")
 sessionInfo()
 ```
 
 ```
-## R version 3.5.0 (2018-04-23)
-## Platform: x86_64-apple-darwin15.6.0 (64-bit)
-## Running under: macOS High Sierra 10.13.6
+## R version 3.5.1 (2018-07-02)
+## Platform: x86_64-w64-mingw32/x64 (64-bit)
+## Running under: Windows 10 x64 (build 17134)
 ## 
 ## Matrix products: default
-## BLAS: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRblas.0.dylib
-## LAPACK: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRlapack.dylib
 ## 
 ## locale:
-## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+## [1] LC_COLLATE=English_United States.1252 
+## [2] LC_CTYPE=English_United States.1252   
+## [3] LC_MONETARY=English_United States.1252
+## [4] LC_NUMERIC=C                          
+## [5] LC_TIME=English_United States.1252    
 ## 
 ## attached base packages:
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-##  [1] forcats_0.3.0     stringr_1.3.0     dplyr_0.7.6      
-##  [4] purrr_0.2.5       readr_1.1.1       tidyr_0.8.1      
-##  [7] tibble_1.4.2      ggplot2_2.2.1     tidyverse_1.2.1  
-## [10] data.table_1.11.4
+##  [1] reshape2_1.4.3    forcats_0.3.0     stringr_1.3.1    
+##  [4] dplyr_0.7.6       purrr_0.2.5       readr_1.1.1      
+##  [7] tidyr_0.8.1       tibble_1.4.2      ggplot2_3.0.0    
+## [10] tidyverse_1.2.1   data.table_1.11.8
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] Rcpp_0.12.16     cellranger_1.1.0 pillar_1.2.2     compiler_3.5.0  
-##  [5] plyr_1.8.4       bindr_0.1.1      tools_3.5.0      digest_0.6.15   
+##  [1] Rcpp_0.12.18     cellranger_1.1.0 pillar_1.3.0     compiler_3.5.1  
+##  [5] plyr_1.8.4       bindr_0.1.1      tools_3.5.1      digest_0.6.15   
 ##  [9] lubridate_1.7.4  jsonlite_1.5     evaluate_0.11    nlme_3.1-137    
-## [13] gtable_0.2.0     lattice_0.20-35  pkgconfig_2.0.2  rlang_0.2.0     
+## [13] gtable_0.2.0     lattice_0.20-35  pkgconfig_2.0.2  rlang_0.2.2     
 ## [17] cli_1.0.0        rstudioapi_0.7   yaml_2.2.0       haven_1.1.2     
-## [21] bindrcpp_0.2.2   xml2_1.2.0       httr_1.3.1       knitr_1.20      
-## [25] hms_0.4.2        rprojroot_1.3-2  grid_3.5.0       tidyselect_0.2.4
-## [29] glue_1.2.0       R6_2.2.2         readxl_1.1.0     rmarkdown_1.10  
-## [33] modelr_0.1.2     magrittr_1.5     backports_1.1.2  scales_0.5.0    
-## [37] htmltools_0.3.6  rvest_0.3.2      assertthat_0.2.0 colorspace_1.3-2
-## [41] stringi_1.2.2    lazyeval_0.2.1   munsell_0.4.3    broom_0.5.0     
-## [45] crayon_1.3.4
+## [21] bindrcpp_0.2.2   withr_2.1.2      xml2_1.2.0       httr_1.3.1      
+## [25] knitr_1.20       hms_0.4.2        rprojroot_1.3-2  grid_3.5.1      
+## [29] tidyselect_0.2.4 glue_1.3.0       R6_2.2.2         readxl_1.1.0    
+## [33] rmarkdown_1.10   modelr_0.1.2     magrittr_1.5     backports_1.1.2 
+## [37] scales_1.0.0     htmltools_0.3.6  rvest_0.3.2      assertthat_0.2.0
+## [41] colorspace_1.3-2 stringi_1.1.7    lazyeval_0.2.1   munsell_0.5.0   
+## [45] broom_0.5.0      crayon_1.3.4
 ```
 
 ### Load and preview data
 
+The data was read in using the following code:
+(Alec, maybe you can expand on why you chose fread over read.csv)
+
 ```r
-setwd("~/MSDS-6306-First-Case-Study/Guidlines")
+setwd("Guidlines")
 beers=fread("beers.csv")
-beers
-```
-
-```
-##                       Name Beer_ID   ABV IBU Brewery_id
-##    1:             Pub Beer    1436 0.050  NA        409
-##    2:          Devil's Cup    2265 0.066  NA        178
-##    3:  Rise of the Phoenix    2264 0.071  NA        178
-##    4:             Sinister    2263 0.090  NA        178
-##    5:        Sex and Candy    2262 0.075  NA        178
-##   ---                                                  
-## 2406:            Belgorado     928 0.067  45        425
-## 2407:        Rail Yard Ale     807 0.052  NA        425
-## 2408:      B3K Black Lager     620 0.055  NA        425
-## 2409:  Silverback Pale Ale     145 0.055  40        425
-## 2410: Rail Yard Ale (2009)      84 0.052  NA        425
-##                                Style Ounces
-##    1:            American Pale Lager     12
-##    2:        American Pale Ale (APA)     12
-##    3:                   American IPA     12
-##    4: American Double / Imperial IPA     12
-##    5:                   American IPA     12
-##   ---                                      
-## 2406:                    Belgian IPA     12
-## 2407:       American Amber / Red Ale     12
-## 2408:                    Schwarzbier     12
-## 2409:        American Pale Ale (APA)     12
-## 2410:       American Amber / Red Ale     12
-```
-
-```r
-str(beers)
-```
-
-```
-## Classes 'data.table' and 'data.frame':	2410 obs. of  7 variables:
-##  $ Name      : chr  "Pub Beer" "Devil's Cup" "Rise of the Phoenix" "Sinister" ...
-##  $ Beer_ID   : int  1436 2265 2264 2263 2262 2261 2260 2259 2258 2131 ...
-##  $ ABV       : num  0.05 0.066 0.071 0.09 0.075 0.077 0.045 0.065 0.055 0.086 ...
-##  $ IBU       : int  NA NA NA NA NA NA NA NA NA NA ...
-##  $ Brewery_id: int  409 178 178 178 178 178 178 178 178 178 ...
-##  $ Style     : chr  "American Pale Lager" "American Pale Ale (APA)" "American IPA" "American Double / Imperial IPA" ...
-##  $ Ounces    : num  12 12 12 12 12 12 12 12 12 12 ...
-##  - attr(*, ".internal.selfref")=<externalptr>
-```
-
-```r
+#beers
+#str(beers)
 breweries=fread("breweries.csv")
-breweries
-```
-
-```
-##      Brew_ID                          Name          City State
-##   1:       1             NorthGate Brewing   Minneapolis    MN
-##   2:       2     Against the Grain Brewery    Louisville    KY
-##   3:       3      Jack's Abby Craft Lagers    Framingham    MA
-##   4:       4     Mike Hess Brewing Company     San Diego    CA
-##   5:       5       Fort Point Beer Company San Francisco    CA
-##  ---                                                          
-## 554:     554           Covington Brewhouse     Covington    LA
-## 555:     555               Dave's Brewfarm        Wilson    WI
-## 556:     556         Ukiah Brewing Company         Ukiah    CA
-## 557:     557       Butternuts Beer and Ale Garrattsville    NY
-## 558:     558 Sleeping Lady Brewing Company     Anchorage    AK
-```
-
-```r
-str(breweries)
-```
-
-```
-## Classes 'data.table' and 'data.frame':	558 obs. of  4 variables:
-##  $ Brew_ID: int  1 2 3 4 5 6 7 8 9 10 ...
-##  $ Name   : chr  "NorthGate Brewing" "Against the Grain Brewery" "Jack's Abby Craft Lagers" "Mike Hess Brewing Company" ...
-##  $ City   : chr  "Minneapolis" "Louisville" "Framingham" "San Diego" ...
-##  $ State  : chr  "MN" "KY" "MA" "CA" ...
-##  - attr(*, ".internal.selfref")=<externalptr>
+#breweries
+#str(breweries)
 ```
 
 
-### How many breweries are the per state?
-By state,
+### How many breweries are there per state?
+By executing the following code, we can generate a table representing the number of breweries in each state.
 
 ```r
 ct_brew=table(breweries[["State"]])
@@ -167,7 +110,7 @@ ct_brew[sort(names(ct_brew))]
 ##  4
 ```
 
-
+This information can be represented graphically for ease of visualization.
 
 ```r
 breweries %>% ggplot(aes(x=State)) + geom_bar()+xlab("State")+ylab("Count") + 
@@ -176,6 +119,7 @@ breweries %>% ggplot(aes(x=State)) + geom_bar()+xlab("State")+ylab("Count") +
 ```
 
 ![](Main_Project_files/figure-html/plot1-1.png)<!-- -->
+Next we'll sort the data in descending order to get an idea of how each state ranks among the others.
 
 ```r
 ct_brew[order(ct_brew)]
@@ -232,8 +176,9 @@ breweries %>% ggplot( aes(x=reorder(State,State,
 
 Here we can see Colorado (CO), California (CA), and Michigan (MI) have the most breweries with 47, 39, and 32 breweries respectively.
 
-Contrastly, Washington DC (DC), North Dakota (ND), South Dakota (SD), and West Virginia (WV) have the fewest breweries: 1 per state.
+Conversely, Washington DC (DC), North Dakota (ND), South Dakota (SD), and West Virginia (WV) have the fewest breweries at 1 per state.
 
+The total number of breweries can be found as follows:
 
 ```r
 nrow(breweries)
@@ -243,29 +188,21 @@ nrow(breweries)
 ## [1] 558
 ```
 
-There are a total of 558 breweries listed in the data set.
+We see there are a total of 558 breweries listed in the data set.
 
+### Merge beer data with the breweries data. Print the first 6 observations and the last six observations to check the merged file.
+
+By merging the two data sets together, we can peform more complex operations to better understand the data contained within.
 
 ```r
 colnames(breweries)[colnames(breweries)=="Brew_ID"]="Brewery_id"
 colnames(breweries)[colnames(breweries)=="Name"]="Brewery_Name"
 colnames(beers)[colnames(beers)=="Name"]="Beer_Name"
 combined_data=merge(beers,breweries,by="Brewery_id")
-nrow(breweries)
+#nrow(breweries)
+#nrow(combined_data)==nrow(beers)
 ```
-
-```
-## [1] 558
-```
-
-```r
-nrow(combined_data)==nrow(beers)
-```
-
-```
-## [1] TRUE
-```
-First six observations
+First six observations of the combined data set:
 
 ```r
 head(combined_data)
@@ -294,7 +231,7 @@ head(combined_data)
 ## 5: Minneapolis    MN
 ## 6: Minneapolis    MN
 ```
-Last six observations
+Last six observations of the combined data set:
 
 ```r
 tail(combined_data)
@@ -323,7 +260,9 @@ tail(combined_data)
 ## 5: Garrattsville    NY
 ## 6:     Anchorage    AK
 ```
-Sum of NA's per column
+
+### Report the number of NA's in each column.
+Sum of NA's per column:
 
 ```r
 apply(combined_data,2,function(x) sum(is.na(x)))
@@ -335,6 +274,11 @@ apply(combined_data,2,function(x) sum(is.na(x)))
 ##        Style       Ounces Brewery_Name         City        State 
 ##            0            0            0            0            0
 ```
+The above code searches every column of the combined data set and adds up each occurance of an NA for every column.
+
+### Compute the median alcohol content and international bitterness unit for each state. Plot a bar chart to compare.
+
+Next we explore the median Alcohol By Volume (ABV) and International Bittering Unit (IBU) of each state.  The code below gathers the medians for ABV and IBU for each state and presents the data in a barchart.
 
 
 ```r
@@ -343,128 +287,61 @@ ibu=combined_data[,median(na.omit(as.numeric(IBU))),State]
 colnames(abv)[2]="ABV"
 colnames(ibu)[2]="IBU"
 meds=merge(ibu,abv,by="State")
-meds
+#meds
+#str(meds)
 ```
 
-```
-##     State  IBU    ABV
-##  1:    AK 46.0 0.0560
-##  2:    AL 43.0 0.0600
-##  3:    AR 39.0 0.0520
-##  4:    AZ 20.5 0.0550
-##  5:    CA 42.0 0.0580
-##  6:    CO 40.0 0.0605
-##  7:    CT 29.0 0.0600
-##  8:    DC 47.5 0.0625
-##  9:    DE 52.0 0.0550
-## 10:    FL 55.0 0.0570
-## 11:    GA 55.0 0.0550
-## 12:    HI 22.5 0.0540
-## 13:    IA 26.0 0.0555
-## 14:    ID 39.0 0.0565
-## 15:    IL 30.0 0.0580
-## 16:    IN 33.0 0.0580
-## 17:    KS 20.0 0.0500
-## 18:    KY 31.5 0.0625
-## 19:    LA 31.5 0.0520
-## 20:    MA 35.0 0.0540
-## 21:    MD 29.0 0.0580
-## 22:    ME 61.0 0.0510
-## 23:    MI 35.0 0.0620
-## 24:    MN 44.5 0.0560
-## 25:    MO 24.0 0.0520
-## 26:    MS 45.0 0.0580
-## 27:    MT 40.0 0.0550
-## 28:    NC 33.5 0.0570
-## 29:    ND 32.0 0.0500
-## 30:    NE 35.0 0.0560
-## 31:    NH 48.5 0.0550
-## 32:    NJ 34.5 0.0460
-## 33:    NM 51.0 0.0620
-## 34:    NV 41.0 0.0600
-## 35:    NY 47.0 0.0550
-## 36:    OH 40.0 0.0580
-## 37:    OK 35.0 0.0600
-## 38:    OR 40.0 0.0560
-## 39:    PA 30.0 0.0570
-## 40:    RI 24.0 0.0550
-## 41:    SC 30.0 0.0550
-## 42:    SD   NA 0.0600
-## 43:    TN 37.0 0.0570
-## 44:    TX 33.0 0.0550
-## 45:    UT 34.0 0.0400
-## 46:    VA 42.0 0.0565
-## 47:    VT 30.0 0.0550
-## 48:    WA 38.0 0.0555
-## 49:    WI 19.0 0.0520
-## 50:    WV 57.5 0.0620
-## 51:    WY 21.0 0.0500
-##     State  IBU    ABV
-```
 
 ```r
-str(meds)
+alcohol <- melt(meds, rm.na=T, id="State")
+names(alcohol) <- c("State", "Metric", "Value")
+# One NA value is found corresponding to IBU for SD.  I replace it with 0.
+alcohol$Value[which(is.na(alcohol$Value))] <- 0
+# Make ABV values negative for proper display on the barplot
+alcohol$Value[as.character(alcohol$Metric)=="ABV"] <- -100*alcohol$Value[as.character(alcohol$Metric)=="ABV"]
+# Create the barplot
+p2 <- ggplot(alcohol, aes(x= State, y= Value, fill= Metric)) + 
+  geom_bar(stat="identity") +
+  geom_text(aes(label= ifelse(Value>0, Value, -1*Value)), vjust= 0.1,
+            hjust= -0.2, size= 2, angle= 90) +
+  scale_y_continuous(expand = c(0,0)) +
+  geom_text(aes(x=1, y= 65, label=" "), vjust=-1)
+p2 <- p2 + labs(title= "Median Alcohol Metrics by State", x ="State", 
+              y = "ABV (%) and IBU (ppm isohumulone)",
+              caption = "NOTE: SD has no information on IBU, thus 0 was used.")
+p2 <- p2 + theme(plot.title = element_text(hjust= 0.5))
+p2 <- p2 + theme(axis.text.x= element_text(size= 8, angle= 90))
+p2 <- p2 + theme(plot.caption = element_text(hjust = 0.5))
+p2
 ```
 
-```
-## Classes 'data.table' and 'data.frame':	51 obs. of  3 variables:
-##  $ State: chr  "AK" "AL" "AR" "AZ" ...
-##  $ IBU  : num  46 43 39 20.5 42 40 29 47.5 52 55 ...
-##  $ ABV  : num  0.056 0.06 0.052 0.055 0.058 0.0605 0.06 0.0625 0.055 0.057 ...
-##  - attr(*, ".internal.selfref")=<externalptr> 
-##  - attr(*, "sorted")= chr "State"
-```
+![](Main_Project_files/figure-html/MedianPlot-1.png)<!-- -->
 
-Median IBU per State Plot
+### Which state has the maximum alcoholic (ABV) beer? Which state has the most bitter (IBU) beer?
+
+The highest ABV can be found in:
 
 ```r
-ggplot(meds,aes(reorder(meds$State,-meds$IBU), y = meds$IBU))+geom_bar(stat = "identity")+labs(x = "State" , y = "IBU") + 
-  ggtitle("Median IBU per State")+theme(axis.text.x = element_text(angle = 90, hjust = 1))
+combined_data[which.max(ABV), State]
 ```
 
 ```
-## Warning: Removed 1 rows containing missing values (position_stack).
+## [1] "CO"
 ```
 
-![](Main_Project_files/figure-html/IBU_Plot-1.png)<!-- -->
-Median ABV per State Plot
+The maximum IBU is found in:
 
 ```r
-ggplot(meds,aes(reorder(meds$State,-meds$ABV), y = meds$ABV))+geom_bar(stat = "identity")+labs(x = "State" , y = "IBU") + 
-  ggtitle("Median ABV per State")+theme(axis.text.x = element_text(angle = 90, hjust = 1))
-```
-
-![](Main_Project_files/figure-html/ABV_plot-1.png)<!-- -->
-
-
-MAX ABV
-
-```r
-combined_data[which.max(ABV),]
+combined_data[which.max(IBU), State]
 ```
 
 ```
-##    Brewery_id                                            Beer_Name Beer_ID
-## 1:         52 Lee Hill Series Vol. 5 - Belgian Style Quadrupel Ale    2565
-##      ABV IBU            Style Ounces            Brewery_Name    City State
-## 1: 0.128  NA Quadrupel (Quad)   19.2 Upslope Brewing Company Boulder    CO
+## [1] "OR"
 ```
 
-Max IBU
+### Summary statistics for the ABV variable.
 
-```r
-combined_data[which.max(IBU),]
-```
-
-```
-##    Brewery_id                 Beer_Name Beer_ID   ABV IBU
-## 1:        375 Bitter Bitch Imperial IPA     980 0.082 138
-##                             Style Ounces            Brewery_Name    City
-## 1: American Double / Imperial IPA     12 Astoria Brewing Company Astoria
-##    State
-## 1:    OR
-```
-
+A summary of the ABV metric yields the following information:
 
 ```r
 sum_abv=summary(combined_data[["ABV"]])
@@ -482,6 +359,9 @@ boxplot(combined_data[["ABV"]],main='ABV Barplot',ylab="ABV")
 
 ![](Main_Project_files/figure-html/summary ABV-1.png)<!-- -->
 
+### Is there an apparent relationship between the bitterness of the beer and its alcoholic content? Draw a scatter plot.
+
+Lastly, we explore if there is a linear relationship between the ABV and the IBU.  The code below generates the plot and determines the sample correlation coefficient, r.
 
 ```r
 ggplot(combined_data,aes(x = ABV,y = IBU ))+geom_point(na.rm=TRUE)+geom_smooth(method=lm,se=FALSE, na.rm=TRUE)+
@@ -491,11 +371,12 @@ ggplot(combined_data,aes(x = ABV,y = IBU ))+geom_point(na.rm=TRUE)+geom_smooth(m
 ![](Main_Project_files/figure-html/correl_graph-1.png)<!-- -->
 
 ```r
-cor(na.omit(combined_data)[["ABV"]],na.omit(combined_data)[["IBU"]])
+r= cor(na.omit(combined_data)[["ABV"]],na.omit(combined_data)[["IBU"]])
+r
 ```
 
 ```
 ## [1] 0.6706215
 ```
 
-
+The data suggests there is a moderate linear relationship between ABV and IBU.  With an correlation coefficient of 0.67, ABV describes roughly 45% of the variability in IBU.  So while there does appear to be a positive linear relationship, we can't say with confidence that that a higher ABV causes a great IBU. 
