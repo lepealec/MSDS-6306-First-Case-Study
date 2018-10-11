@@ -332,6 +332,7 @@ combined_data[which.max(IBU), State]
 OR has the highest IBU out every state at 138ppm isohumuloneu, which is found in Bitter Bitch Imperial IPA by Astoria Brewing Company.
 
 ### Summary statistics for the ABV variable.
+
 A summary of the ABV metric yields the following information:
 
 ```r
@@ -348,7 +349,8 @@ sum_abv
 boxplot(combined_data[["ABV"]],main='ABV Barplot',ylab="ABV")
 ```
 
-![](Main_Project_files/figure-html/summary ABV-1.png)<!-- -->
+![](Main_Project_files/figure-html/summary_ABV-1.png)<!-- -->
+
 ### Is there an apparent relationship between the bitterness of the beer and its alcoholic content? Draw a scatter plot.
 
 Lastly, we explore if there is a linear relationship between the ABV and the IBU.  The code below generates the plot and determines the sample correlation coefficient, r.
