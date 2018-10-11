@@ -152,11 +152,13 @@ The highest ABV can be found in:
 ``` {r max abv}
 combined_data[which.max(ABV), State]
 ```
+Exploring this further, we see that `r combined_data[which.max(ABV), State]` has a beer with an ABV of `r combined_data[which.max(ABV), ABV]` found in `r combined_data[which.max(ABV), Beer_Name]` by `r combined_data[which.max(ABV), Brewery_Name]`.
 
 The maximum IBU is found in:
 ``` {r max ibu}
 combined_data[which.max(IBU), State]
 ```
+`r combined_data[which.max(IBU), State]` has the highest IBU out every state at `r combined_data[which.max(IBU), IBU]`ppm isohumuloneu, which is found in `r combined_data[which.max(IBU), Beer_Name]` by `r combined_data[which.max(IBU), Brewery_Name]`.
 
 ### Summary statistics for the ABV variable.
 

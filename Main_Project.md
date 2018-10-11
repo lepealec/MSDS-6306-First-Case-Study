@@ -318,6 +318,7 @@ combined_data[which.max(ABV), State]
 ```
 ## [1] "CO"
 ```
+Exploring this further, we see that CO has a beer with an ABV of 0.128 found in Lee Hill Series Vol. 5 - Belgian Style Quadrupel Ale by Upslope Brewing Company.
 
 The maximum IBU is found in:
 
@@ -328,6 +329,7 @@ combined_data[which.max(IBU), State]
 ```
 ## [1] "OR"
 ```
+OR has the highest IBU out every state at 138ppm isohumuloneu, which is found in Bitter Bitch Imperial IPA by Astoria Brewing Company.
 
 ### Summary statistics for the ABV variable.
 
