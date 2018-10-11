@@ -190,14 +190,10 @@ sessionInfo()</code></pre>
 </div>
 <div id="load-and-preview-data" class="section level3">
 <h3>Load and preview data</h3>
-<p>The data was read in using the following code: (Alec, maybe you can expand on why you chose fread over read.csv)</p>
-<pre class="r"><code>setwd(&quot;Guidlines&quot;)
+<p>The data was read in using the following code:</p>
+<pre class="r"><code>setwd(&quot;Guidelines&quot;)
 beers=fread(&quot;beers.csv&quot;)
-#beers
-#str(beers)
-breweries=fread(&quot;breweries.csv&quot;)
-#breweries
-#str(breweries)</code></pre>
+breweries=fread(&quot;breweries.csv&quot;)</code></pre>
 </div>
 <div id="how-many-breweries-are-there-per-state" class="section level3">
 <h3>How many breweries are there per state?</h3>
@@ -260,9 +256,7 @@ ct_brew[sort(names(ct_brew))]</code></pre>
 <pre class="r"><code>colnames(breweries)[colnames(breweries)==&quot;Brew_ID&quot;]=&quot;Brewery_id&quot;
 colnames(breweries)[colnames(breweries)==&quot;Name&quot;]=&quot;Brewery_Name&quot;
 colnames(beers)[colnames(beers)==&quot;Name&quot;]=&quot;Beer_Name&quot;
-combined_data=merge(beers,breweries,by=&quot;Brewery_id&quot;)
-#nrow(breweries)
-#nrow(combined_data)==nrow(beers)</code></pre>
+combined_data=merge(beers,breweries,by=&quot;Brewery_id&quot;)</code></pre>
 <p>First six observations of the combined data set:</p>
 <pre class="r"><code>head(combined_data)</code></pre>
 <pre><code>##    Brewery_id     Beer_Name Beer_ID   ABV IBU
@@ -327,9 +321,7 @@ combined_data=merge(beers,breweries,by=&quot;Brewery_id&quot;)
 ibu=combined_data[,median(na.omit(as.numeric(IBU))),State]
 colnames(abv)[2]=&quot;ABV&quot;
 colnames(ibu)[2]=&quot;IBU&quot;
-meds=merge(ibu,abv,by=&quot;State&quot;)
-#meds
-#str(meds)</code></pre>
+meds=merge(ibu,abv,by=&quot;State&quot;)</code></pre>
 <pre class="r"><code>alcohol &lt;- melt(meds, na.rm=T, id=&quot;State&quot;)
 names(alcohol) &lt;- c(&quot;State&quot;, &quot;Metric&quot;, &quot;Value&quot;)
 # One NA value is found corresponding to IBU for SD.  I replace it with 0.

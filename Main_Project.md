@@ -78,16 +78,11 @@ sessionInfo()
 ### Load and preview data
 
 The data was read in using the following code:
-(Alec, maybe you can expand on why you chose fread over read.csv)
 
 ```r
-setwd("Guidlines")
+setwd("Guidelines")
 beers=fread("beers.csv")
-#beers
-#str(beers)
 breweries=fread("breweries.csv")
-#breweries
-#str(breweries)
 ```
 
 
@@ -198,8 +193,6 @@ colnames(breweries)[colnames(breweries)=="Brew_ID"]="Brewery_id"
 colnames(breweries)[colnames(breweries)=="Name"]="Brewery_Name"
 colnames(beers)[colnames(beers)=="Name"]="Beer_Name"
 combined_data=merge(beers,breweries,by="Brewery_id")
-#nrow(breweries)
-#nrow(combined_data)==nrow(beers)
 ```
 First six observations of the combined data set:
 
@@ -286,8 +279,6 @@ ibu=combined_data[,median(na.omit(as.numeric(IBU))),State]
 colnames(abv)[2]="ABV"
 colnames(ibu)[2]="IBU"
 meds=merge(ibu,abv,by="State")
-#meds
-#str(meds)
 ```
 
 
