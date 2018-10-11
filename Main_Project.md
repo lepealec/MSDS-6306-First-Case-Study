@@ -293,7 +293,7 @@ meds=merge(ibu,abv,by="State")
 
 
 ```r
-alcohol <- reshape2::melt(meds, rm.na=T, id="State")
+alcohol <- reshape2:::melt(meds, rm.na=T, id="State")
 names(alcohol) <- c("State", "Metric", "Value")
 # One NA value is found corresponding to IBU for SD.  I replace it with 0.
 alcohol$Value[which(is.na(alcohol$Value))] <- 0
