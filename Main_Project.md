@@ -332,7 +332,6 @@ combined_data[which.max(IBU), State]
 OR has the highest IBU out every state at 138ppm isohumuloneu, which is found in Bitter Bitch Imperial IPA by Astoria Brewing Company.
 
 ### Summary statistics for the ABV variable.
-
 A summary of the ABV metric yields the following information:
 
 ```r

@@ -161,7 +161,6 @@ combined_data[which.max(IBU), State]
 `r combined_data[which.max(IBU), State]` has the highest IBU out every state at `r combined_data[which.max(IBU), IBU]`ppm isohumuloneu, which is found in `r combined_data[which.max(IBU), Beer_Name]` by `r combined_data[which.max(IBU), Brewery_Name]`.
 
 ### Summary statistics for the ABV variable.
-
 A summary of the ABV metric yields the following information:
 ``` {r summary ABV}
 sum_abv=summary(combined_data[["ABV"]])
