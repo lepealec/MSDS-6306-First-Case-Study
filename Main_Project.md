@@ -34,7 +34,6 @@ https://github.com/lepealec/MSDS-6306-First-Case-Study.git
 library("data.table")
 library("tidyverse")
 library('ggplot2')
-library("reshape2")
 sessionInfo()
 ```
 
@@ -56,10 +55,10 @@ sessionInfo()
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-##  [1] reshape2_1.4.3    forcats_0.3.0     stringr_1.3.1    
-##  [4] dplyr_0.7.6       purrr_0.2.5       readr_1.1.1      
-##  [7] tidyr_0.8.1       tibble_1.4.2      ggplot2_3.0.0    
-## [10] tidyverse_1.2.1   data.table_1.11.8
+##  [1] forcats_0.3.0     stringr_1.3.1     dplyr_0.7.6      
+##  [4] purrr_0.2.5       readr_1.1.1       tidyr_0.8.1      
+##  [7] tibble_1.4.2      ggplot2_3.0.0     tidyverse_1.2.1  
+## [10] data.table_1.11.8
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] Rcpp_0.12.18     cellranger_1.1.0 pillar_1.3.0     compiler_3.5.1  
@@ -293,7 +292,7 @@ meds=merge(ibu,abv,by="State")
 
 
 ```r
-alcohol <- reshape2:::melt(meds, rm.na=T, id="State")
+alcohol <- melt(meds, na.rm=T, id="State")
 names(alcohol) <- c("State", "Metric", "Value")
 # One NA value is found corresponding to IBU for SD.  I replace it with 0.
 alcohol$Value[which(is.na(alcohol$Value))] <- 0
