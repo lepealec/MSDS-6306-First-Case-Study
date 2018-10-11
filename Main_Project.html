@@ -331,7 +331,7 @@ colnames(ibu)[2]=&quot;IBU&quot;
 meds=merge(ibu,abv,by=&quot;State&quot;)
 #meds
 #str(meds)</code></pre>
-<pre class="r"><code>alcohol &lt;- melt(meds, rm.na=T, id=&quot;State&quot;)
+<pre class="r"><code>alcohol &lt;- reshape2::melt(meds, rm.na=T, id=&quot;State&quot;)
 names(alcohol) &lt;- c(&quot;State&quot;, &quot;Metric&quot;, &quot;Value&quot;)
 # One NA value is found corresponding to IBU for SD.  I replace it with 0.
 alcohol$Value[which(is.na(alcohol$Value))] &lt;- 0

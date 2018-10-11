@@ -134,7 +134,7 @@ meds=merge(ibu,abv,by="State")
 ```
 
 ``` {r MedianPlot}
-alcohol <- melt(meds, rm.na=T, id="State")
+alcohol <- reshape2::melt(meds, rm.na=T, id="State")
 names(alcohol) <- c("State", "Metric", "Value")
 # One NA value is found corresponding to IBU for SD.  I replace it with 0.
 alcohol$Value[which(is.na(alcohol$Value))] <- 0
@@ -187,4 +187,4 @@ r= cor(na.omit(combined_data)[["ABV"]],na.omit(combined_data)[["IBU"]])
 r
 ```
 
-The data suggests there is a moderate linear relationship between ABV and IBU.  With an correlation coefficient of `r round(r,2)`, ABV describes roughly `r round((r^2)*100)`% of the variability in IBU.  So while there does appear to be a positive linear relationship, we can't say with confidence that that a higher ABV causes a great IBU.
+The data suggests there is a moderate linear relationship between ABV and IBU.  With an correlation coefficient of `r round(r,2)`, ABV describes roughly `r round((r^2)*100)`% of the variability in IBU.  So while there does appear to be a positive linear relationship, we can't say with confidence that that a higher ABV causes a great IBU. 
