@@ -350,7 +350,6 @@ boxplot(combined_data[["ABV"]],main='ABV Barplot',ylab="ABV")
 ```
 
 ![](Main_Project_files/figure-html/summary ABV-1.png)<!-- -->
-
 ### Is there an apparent relationship between the bitterness of the beer and its alcoholic content? Draw a scatter plot.
 
 Lastly, we explore if there is a linear relationship between the ABV and the IBU.  The code below generates the plot and determines the sample correlation coefficient, r.
