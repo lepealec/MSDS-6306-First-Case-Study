@@ -2,6 +2,20 @@
 
 This is a Case Study created for MSDS 6306 course based on Beers.csv and Breweries.csv data provided.
 
+### File Organization
+
+* Repository Main folder: contains ReadME.md, Main_Project.md, Main_Project.Rmd, Main_Project.html files and sub folders of Guidelines and Main_Project_files
+
+* Guidelines folder:  Contains the code for getting the data sets
+
+  Files:
+  - Case Study 01.pdf -outline for the case study
+  - Beers.csv
+  - Breweries.csv
+
+* Main_Project_files folder:  Contains all the presentation files for the case study
+
+
 ### Description Set Descriptions
 The Beers dataset contains a list of 2410 US craft beers and Breweries dataset contains 558 US breweries. The datasets descriptions are as follows.
 
