@@ -17,7 +17,7 @@ Brew ID: Unique identifier of the brewery. Name: Name of the brewery.
 City: City where the brewery is located.
 State: U.S. State where the brewery is located.
 
-### Using the Beers.csv and Breweries.csv data sets.
+### Key Questions for the dataset.
 1. How many breweries are present in each state?
 2. Merge beer data with the breweries data. Print the first 6 observations and the last six observations to check the merged file.
 3. Report the number of NA’s in each column.
