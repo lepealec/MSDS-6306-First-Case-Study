@@ -398,7 +398,7 @@ correlation
 ## 0.6706215
 ```
 
-There is a correlation between International Bitterness Units (IBU) and Alcohol by Volume (ABV). The Pearson's R Correlation was run on the full data set and the clean data set. The correlation result is 0.67, indicating a moderate linear relationship. The 95% confidence interval is .64 to .69.
+There is a correlation between International Bitterness Units (IBU) and Alcohol by Volume (ABV). The Pearson's R Correlation was run on the combined data set. The correlation result is 0.67, indicating a moderate linear relationship. The 95% confidence interval is .64 to .69.
 
 ### Conclusion
 
