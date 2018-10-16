@@ -58,11 +58,11 @@ sessionInfo()
 ##  [1] forcats_0.3.0     stringr_1.3.1     dplyr_0.7.6      
 ##  [4] purrr_0.2.5       readr_1.1.1       tidyr_0.8.1      
 ##  [7] tibble_1.4.2      ggplot2_3.0.0     tidyverse_1.2.1  
-## [10] data.table_1.11.8
+## [10] data.table_1.11.4
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] Rcpp_0.12.18     cellranger_1.1.0 pillar_1.3.0     compiler_3.5.1  
-##  [5] plyr_1.8.4       bindr_0.1.1      tools_3.5.1      digest_0.6.15   
+##  [5] plyr_1.8.4       bindr_0.1.1      tools_3.5.1      digest_0.6.17   
 ##  [9] lubridate_1.7.4  jsonlite_1.5     evaluate_0.11    nlme_3.1-137    
 ## [13] gtable_0.2.0     lattice_0.20-35  pkgconfig_2.0.2  rlang_0.2.2     
 ## [17] cli_1.0.0        rstudioapi_0.7   yaml_2.2.0       haven_1.1.2     
@@ -372,3 +372,37 @@ r
 ```
 
 The data suggests there is a moderate linear relationship between ABV and IBU.  With an correlation coefficient of 0.67, ABV describes roughly 45% of the variability in IBU.  So while there does appear to be a positive linear relationship, we can't say with confidence that that a higher ABV causes a great IBU. 
+
+
+
+### Correlation Discussion
+
+The Pearson's Correlation was run on the full data set and the clean data set to assess the correlation between International Bitterness Units (IBU) and Alcohol by Volume (ABV). Pearson's correlation is a measure of the linear correlation between two variables X and Y.
+
+```r
+correlation <- cor.test(combined_data$ABV, combined_data$IBU, method="pearson")
+correlation
+```
+
+```
+## 
+## 	Pearson's product-moment correlation
+## 
+## data:  combined_data$ABV and combined_data$IBU
+## t = 33.863, df = 1403, p-value < 2.2e-16
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.6407982 0.6984238
+## sample estimates:
+##       cor 
+## 0.6706215
+```
+
+There is a correlation between International Bitterness Units (IBU) and Alcohol by Volume (ABV). The Pearson's R Correlation was run on the full data set and the clean data set. The correlation result is 0.67, indicating a moderate linear relationship. The 95% confidence interval is .64 to .69.
+
+### Conclusion
+
+If a bitter beer company was looking to expand to a new region. Our recommendation is that they extend into Maine. This recommendation is based on the popularity of bitter beer in ME (highest median IBU value) and with only 9 other breweries in ME there would be less competition.
+
+
+

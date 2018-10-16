@@ -180,3 +180,23 @@ r
 ```
 
 The data suggests there is a moderate linear relationship between ABV and IBU.  With an correlation coefficient of `r round(r,2)`, ABV describes roughly `r round((r^2)*100)`% of the variability in IBU.  So while there does appear to be a positive linear relationship, we can't say with confidence that that a higher ABV causes a great IBU. 
+
+
+
+### Correlation Discussion
+
+The Pearson's Correlation was run on the full data set and the clean data set to assess the correlation between International Bitterness Units (IBU) and Alcohol by Volume (ABV). Pearson's correlation is a measure of the linear correlation between two variables X and Y.
+```{r}
+correlation <- cor.test(combined_data$ABV, combined_data$IBU, method="pearson")
+correlation
+
+```
+
+There is a correlation between International Bitterness Units (IBU) and Alcohol by Volume (ABV). The Pearson's R Correlation was run on the full data set and the clean data set. The correlation result is 0.67, indicating a moderate linear relationship. The 95% confidence interval is .64 to .69.
+
+### Conclusion
+
+If a bitter beer company was looking to expand to a new region. Our recommendation is that they extend into Maine. This recommendation is based on the popularity of bitter beer in ME (highest median IBU value) and with only 9 other breweries in ME there would be less competition.
+
+
+
